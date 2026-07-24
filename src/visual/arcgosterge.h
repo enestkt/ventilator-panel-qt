@@ -5,7 +5,7 @@
 #include <QString>
 
 // ============================================================
-//  ArcGosterge — biyovent tarzı SARI YAY göstergesi.
+//  ArcGosterge — SARI YAY göstergesi.
 //  Ortada büyük sayı, etrafında değere göre dolan sarı yay.
 //  CizimWidget'tan TÜRER (kalıtım) → iceriCiz()'i override eder.
 // ============================================================

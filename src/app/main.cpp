@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // --- Global açık monitör teması (biyovent tarzı) ---
+    // --- Global açık monitör teması ---
     a.setStyleSheet(R"(
         /* Zemin rengini SADECE pencereye veriyoruz.
            Onceden bu kural "QWidget" idi ve istisnasiz her widget'a
