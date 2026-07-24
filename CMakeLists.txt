@@ -12,29 +12,37 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+# Kaynaklar katmanlara gore klasorlenmistir. Klasorler asagida include
+# yoluna eklendigi icin dosyalardaki #include satirlari degismedi.
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        src/app/main.cpp
+        src/app/mainwindow.cpp
+        src/app/mainwindow.h
+        src/app/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(nefes_panel
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        solunumsensoru.h solunumsensoru.cpp
-        trendgrafik.h trendgrafik.cpp
-        solunumdalgasi.h solunumdalgasi.cpp
-        yardimcilar.h yardimcilar.cpp
-        cizimwidget.h cizimwidget.cpp
-        arcgosterge.h arcgosterge.cpp
-        olcumler.h
-        alarmkurali.h
-        alarmdegerlendirici.h alarmdegerlendirici.cpp
-        iolcumkaynagi.h
-        hastatipi.h
-        kuralfabrikasi.h kuralfabrikasi.cpp
+
+        # --- veri katmani ---
+        src/data/olcumler.h
+        src/data/iolcumkaynagi.h
+        src/data/solunumsensoru.h      src/data/solunumsensoru.cpp
+        src/data/yardimcilar.h         src/data/yardimcilar.cpp
+
+        # --- alarm katmani ---
+        src/alarm/hastatipi.h
+        src/alarm/alarmkurali.h
+        src/alarm/alarmdegerlendirici.h src/alarm/alarmdegerlendirici.cpp
+        src/alarm/kuralfabrikasi.h      src/alarm/kuralfabrikasi.cpp
+
+        # --- gorsel katman ---
+        src/visual/cizimwidget.h       src/visual/cizimwidget.cpp
+        src/visual/arcgosterge.h       src/visual/arcgosterge.cpp
+        src/visual/trendgrafik.h       src/visual/trendgrafik.cpp
+        src/visual/solunumdalgasi.h    src/visual/solunumdalgasi.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET nefes_panel APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -55,7 +63,14 @@ else()
 endif()
 
 target_link_libraries(nefes_panel PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_include_directories(nefes_panel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+# Her katman klasoru include yolunda. Bu sayede kaynaklardaki
+# #include "alarmkurali.h" gibi satirlar klasorlemeden etkilenmedi.
+target_include_directories(nefes_panel PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/data
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/alarm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/visual
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/app
+)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
