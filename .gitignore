@@ -32,3 +32,6 @@ qrc_*.cpp
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# --- Kisisel calisma notlari (repoya girmez) ---
+PROJE_NOTLARI.md
