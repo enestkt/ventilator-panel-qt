@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1020</width>
+    <height>647</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Nefes Paneli</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="anaLayout" stretch="0,0,1,0">
+    <item>
+     <widget class="QWidget" name="olculenGroup" native="true">
+      <layout class="QHBoxLayout" name="olculenLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="hizGroup">
+         <property name="title">
+          <string>Solunum Hızı (/dk)</string>
+         </property>
+         <layout class="QVBoxLayout" name="hizLayout">
+          <item>
+           <widget class="ArcGosterge" name="hizGauge" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>85</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="spo2Group">
+         <property name="title">
+          <string>SpO₂ (%)</string>
+         </property>
+         <layout class="QVBoxLayout" name="spo2Layout">
+          <item>
+           <widget class="ArcGosterge" name="spo2Gauge" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>85</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="vtGroup">
+         <property name="title">
+          <string>Vt (mL)</string>
+         </property>
+         <layout class="QVBoxLayout" name="vtLayout">
+          <item>
+           <widget class="ArcGosterge" name="vtGauge" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>85</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="etco2Group">
+         <property name="title">
+          <string>EtCO₂ (mmHg)</string>
+         </property>
+         <layout class="QVBoxLayout" name="etco2Layout">
+          <item>
+           <widget class="ArcGosterge" name="etco2Gauge" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>85</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="alarmLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>44</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>44</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Durum: Normal</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="ortaLayout">
+      <item>
+       <widget class="QGroupBox" name="dalgaGroup">
+        <property name="title">
+         <string>Dalga Formu ve Trend</string>
+        </property>
+        <layout class="QVBoxLayout" name="solLayout">
+         <item>
+          <widget class="SolunumDalgasi" name="solunumDalgasi" native="true"/>
+         </item>
+         <item>
+          <widget class="TrendGrafik" name="trendGrafik" native="true"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="hizSlider">
+           <property name="minimum">
+            <number>5</number>
+           </property>
+           <property name="maximum">
+            <number>40</number>
+           </property>
+           <property name="value">
+            <number>12</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="istatistikLabel">
+           <property name="text">
+            <string>En düşük: -   En yüksek: -</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="sagLayout">
+        <item>
+         <widget class="QGroupBox" name="hastaTipiGroup">
+          <property name="title">
+           <string>Hasta Tipi</string>
+          </property>
+          <layout class="QHBoxLayout" name="hastaTipiLayout">
+           <item>
+            <widget class="QPushButton" name="bebekButton">
+             <property name="text">
+              <string>Bebek</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="cocukButton">
+             <property name="text">
+              <string>Çocuk</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="eriskinButton">
+             <property name="text">
+              <string>Erişkin</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="ayarGroup">
+          <property name="title">
+           <string>Ventilasyon Ayarları</string>
+          </property>
+          <layout class="QHBoxLayout" name="ayarLayout">
+           <item>
+            <widget class="QWidget" name="fio2Group" native="true">
+             <layout class="QVBoxLayout" name="fio2Layout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="fio2Baslik">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>FiO₂ (%)</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="ArcGosterge" name="fio2Gauge" native="true"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="peepGroup" native="true">
+             <layout class="QVBoxLayout" name="peepLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="peepBaslik">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>PEEP (cmH₂O)</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="ArcGosterge" name="peepGauge" native="true"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="ieGroup" native="true">
+             <layout class="QVBoxLayout" name="ieLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="ieBaslik">
+                <property name="text">
+                 <string>I:E</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="ieLabel">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font-size: 22px; font-weight: bold;</string>
+                </property>
+                <property name="text">
+                 <string>1:2</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gunlukGroup">
+          <property name="title">
+           <string>Alarm Günlüğü</string>
+          </property>
+          <layout class="QVBoxLayout" name="gunlukLayout">
+           <item>
+            <widget class="QListWidget" name="alarmListesi"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="altLayout">
+      <item>
+       <widget class="QPushButton" name="baslatDurdurButton">
+        <property name="text">
+         <string>Durdur</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="resetButton">
+        <property name="text">
+         <string>İstatistiği Sıfırla</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TrendGrafik</class>
+   <extends>QWidget</extends>
+   <header>trendgrafik.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SolunumDalgasi</class>
+   <extends>QWidget</extends>
+   <header>solunumdalgasi.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ArcGosterge</class>
+   <extends>QWidget</extends>
+   <header>arcgosterge.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
