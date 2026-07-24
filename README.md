@@ -6,6 +6,8 @@ The panel continuously simulates four respiratory parameters, renders them as
 live waveforms and arc gauges, and raises alarms when patient-type-specific
 thresholds are crossed.
 
+![Ventilator panel with a tachypnoea alarm active](docs/screenshot.png)
+
 > Learning project. The device layout follows the general conventions of an
 > intensive-care ventilator display; it is **not** medical software and must not
 > be used clinically.
