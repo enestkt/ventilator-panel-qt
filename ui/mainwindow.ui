@@ -144,7 +144,7 @@
         <property name="title">
          <string>Dalga Formu ve Trend</string>
         </property>
-        <layout class="QVBoxLayout" name="solLayout">
+        <layout class="QVBoxLayout" name="solLayout" stretch="1,1,0,0">
          <item>
           <widget class="SolunumDalgasi" name="solunumDalgasi" native="true"/>
          </item>
@@ -181,7 +181,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="sagLayout">
+       <layout class="QVBoxLayout" name="sagLayout" stretch="0,0,1">
         <item>
          <widget class="QGroupBox" name="hastaTipiGroup">
           <property name="title">
@@ -256,12 +256,6 @@
               </property>
               <item>
                <widget class="QLabel" name="fio2Baslik">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>80</height>
-                 </size>
-                </property>
                 <property name="text">
                  <string>FiO₂ (%)</string>
                 </property>
@@ -271,7 +265,14 @@
                </widget>
               </item>
               <item>
-               <widget class="ArcGosterge" name="fio2Gauge" native="true"/>
+               <widget class="ArcGosterge" name="fio2Gauge" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>80</height>
+                 </size>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -293,12 +294,6 @@
               </property>
               <item>
                <widget class="QLabel" name="peepBaslik">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>80</height>
-                 </size>
-                </property>
                 <property name="text">
                  <string>PEEP (cmH₂O)</string>
                 </property>
@@ -308,7 +303,14 @@
                </widget>
               </item>
               <item>
-               <widget class="ArcGosterge" name="peepGauge" native="true"/>
+               <widget class="ArcGosterge" name="peepGauge" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>80</height>
+                 </size>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>

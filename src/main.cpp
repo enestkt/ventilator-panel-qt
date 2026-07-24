@@ -51,6 +51,34 @@ int main(int argc, char *argv[])
             border: 1px solid #c3ccd6;
             border-radius: 6px;
         }
+
+        /* --- QSlider ---
+           Global bir stylesheet devreye girdiginde Qt, cizimi
+           QStyleSheetStyle'a devreder. Kural yazilmayan alt parcalar
+           (groove, handle, sub-page) platform stilinin yerine geri
+           donus cizimiyle olusur ve temaya uymayabilir. Slider bu
+           yuzden panelin disinda duruyordu; parcalarini acikca
+           tanimliyoruz. */
+        QSlider::groove:horizontal {
+            height: 6px;
+            border-radius: 3px;
+            background: #dbe2ea;      /* yay gostergesinin gri izi ile ayni */
+        }
+        QSlider::sub-page:horizontal {
+            height: 6px;
+            border-radius: 3px;
+            background: #4a90d9;      /* secili buton cercevesiyle ayni mavi */
+        }
+        QSlider::handle:horizontal {
+            width: 16px;
+            margin: -6px 0;           /* groove'dan tasarak yuvarlak gorunur */
+            border-radius: 9px;
+            background: #ffffff;
+            border: 2px solid #4a90d9;
+        }
+        QSlider::handle:horizontal:hover {
+            background: #e8f1fb;
+        }
     )");
 
     MainWindow w;
