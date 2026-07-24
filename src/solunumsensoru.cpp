@@ -1,5 +1,6 @@
 #include "solunumsensoru.h"
 #include <QRandomGenerator>
+#include <utility>          // std::move
 #include "yardimcilar.h"
 #include "kuralfabrikasi.h"
 
@@ -22,9 +23,11 @@
     {
         degerlendirici.kurallariTemizle();
 
-        const QList<AlarmKurali *> yeniKurallar = KuralFabrikasi::olustur(tip);
-        for(AlarmKurali *kural : yeniKurallar)
-            degerlendirici.kuralEkle(kural);
+        // Fabrika sahipligi bize devrediyor, biz de std::move ile
+        // degerlendiriciye devrediyoruz. Sahiplik zinciri her adimda
+        // tek elde kaliyor.
+        for (auto &kural : KuralFabrikasi::olustur(tip))
+            degerlendirici.kuralEkle(std::move(kural));
 
         alarmiKontrolEt();
     }

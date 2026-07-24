@@ -7,13 +7,13 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(std::make_unique<Ui::MainWindow>())
 {
     ui->setupUi(this);
 
-    // Orta satır: sol (dalga/trend) sağdan 2 kat geniş olsun
-    ui->ortaLayout->setStretch(0, 2);
-    ui->ortaLayout->setStretch(1, 1);
+    // Not: layout stretch degerleri artik .ui dosyasinda (layoutStretch
+    // ozelligi) tanimli. Eskiden burada koddan veriliyordu; ayni ayarin
+    // iki yerde durmamasi icin buradan kaldirildi.
 
     // --- Yay göstergelerini tanımla (aralık + birim + başlangıç) ---
     ui->hizGauge->ayarla(5, 40, "/dk");      ui->hizGauge->degeriAyarla(12);
@@ -128,8 +128,10 @@ void MainWindow::alarmKaydet(bool aktif, const QString &mesaj)
 
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+// Govdesi bos ama .cpp'de tanimlanmak ZORUNDA: ui bir
+// unique_ptr<Ui::MainWindow> ve Ui::MainWindow header'da sadece
+// ileri bildirilmis. unique_ptr yikim aninda tipin tam tanimini
+// gerektirir; o tanim ancak burada, ui_mainwindow.h include
+// edildikten sonra gorunur.
+MainWindow::~MainWindow() = default;
 

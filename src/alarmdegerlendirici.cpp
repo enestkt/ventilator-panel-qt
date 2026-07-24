@@ -1,31 +1,31 @@
 #include "alarmdegerlendirici.h"
 
-AlarmDegerlendirici::~AlarmDegerlendirici()
-{
-    kurallariTemizle();
-}
+#include <utility>   // std::move
 
 void AlarmDegerlendirici::kurallariTemizle()
 {
-    for(AlarmKurali *kural : kurallar)
-        delete kural;
+    // Eskiden burada dongu ile tek tek delete ediliyordu.
+    // clear() vector'u bosaltirken icindeki unique_ptr'lar yok olur,
+    // onlar da isaret ettikleri kurallari siler.
     kurallar.clear();
 }
-void AlarmDegerlendirici::kuralEkle(AlarmKurali *kural)
+
+void AlarmDegerlendirici::kuralEkle(std::unique_ptr<AlarmKurali> kural)
 {
-    if(kural)
-        kurallar.append(kural);
+    if (kural)
+        kurallar.push_back(std::move(kural));
 }
 
 bool AlarmDegerlendirici::degerlendir(const Olcumler &o, QString &mesajOut) const
 {
-    for (AlarmKurali *kural : kurallar){
-        if(kural->tetiklendiMi(o)){
+    // const auto & : unique_ptr kopyalanamaz, degerle alsaydik derlenmezdi.
+    for (const auto &kural : kurallar) {
+        if (kural->tetiklendiMi(o)) {     // POLIMORFIZM — vtable uzerinden
             mesajOut = kural->mesaj();
             return true;
         }
     }
+
     mesajOut.clear();
     return false;
 }
-

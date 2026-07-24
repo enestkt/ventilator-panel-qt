@@ -88,10 +88,18 @@ concrete simulation type instead.
 step to subclasses via a `protected` pure virtual `iceriCiz`. Subclasses cannot
 forget the background or reverse the order.
 
-**Ownership.** `AlarmDegerlendirici` owns its rules and deletes them in its
-destructor, so `AlarmKurali` declares a virtual destructor and the evaluator
-deletes its copy constructor and copy assignment — copying would produce a
-shallow copy and a double delete.
+**Ownership.** Alarm rules are held as `std::unique_ptr`, so `AlarmDegerlendirici`
+owns them without writing a destructor, a copy constructor or a copy assignment
+— the compiler deletes copying on its own because `unique_ptr` is move-only, and
+the vector releases the rules when it goes away. `KuralFabrikasi::olustur`
+returns `std::vector<std::unique_ptr<AlarmKurali>>`, so the signature itself says
+who is responsible for the objects. `AlarmKurali` still declares a virtual
+destructor: `unique_ptr` deletes through a base-class pointer.
+
+Qt's parent-child ownership is deliberately left alone. `new QTimer(this)` and
+`new SolunumSensoru(this)` stay raw, because the parent already owns them and
+wrapping them would delete them twice. `MainWindow::kaynak` also stays raw: it
+observes, it does not own, and a raw pointer is the correct way to say that.
 
 **Strategy / chain of responsibility.** Each alarm rule is a self-contained
 strategy; the evaluator tries them in order and returns the first that fires.
@@ -117,8 +125,6 @@ Or open `CMakeLists.txt` in Qt Creator and build from there.
 
 These are deliberate and known, not oversights:
 
-- Raw pointers with manual `delete`; `std::unique_ptr` would express ownership
-  better and is the next planned refactor.
 - `TrendGrafik` hard-codes its 5–40 value range instead of exposing a setter
   the way `ArcGosterge` does.
 - `SolunumDalgasi::faz` grows without bound; it should wrap at 2 pi.
